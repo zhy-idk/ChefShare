@@ -8,12 +8,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.android.material.button.MaterialButton;
@@ -31,6 +33,7 @@ import java.util.Objects;
 public class PostsAdapter extends FirebaseRecyclerAdapter<PostsModel, PostsAdapter.ViewHolder> {
 
     //private final FirebaseAuth mAuth = FirebaseAuth.getInstance();
+    DatabaseReference dbRef;
 
     public PostsAdapter(@NonNull FirebaseRecyclerOptions<PostsModel> options) {
         super(options);
@@ -38,21 +41,38 @@ public class PostsAdapter extends FirebaseRecyclerAdapter<PostsModel, PostsAdapt
 
     @Override
     protected void onBindViewHolder(@NonNull ViewHolder holder, int position, @NonNull PostsModel model) {
-        holder.txtAuthor.setText(model.getAuthor());
         holder.txtTitle.setText(model.getTitle());
-        holder.txtBody.setText(model.getBody());
-
-        TextView testing = holder.txtBody;
 
         String postId = getRef(position).getKey();
+        String authorId = model.getAuthor();
+
+        dbRef = FirebaseDatabase.getInstance().getReference("posts")
+                .child(postId);
+
+        DatabaseReference authorRef = FirebaseDatabase.getInstance().getReference("users")
+                .child(authorId);
+
+        authorRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists()){
+                    String authorName = String.valueOf(snapshot.child("name").getValue());
+                    holder.txtAuthor.setText(authorName);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
         //String uid = mAuth.getCurrentUser().getUid();
         String uid = "qwertyuiop";
 
-        DatabaseReference likesRef = FirebaseDatabase.getInstance().getReference("posts")
-                .child(postId).child("likes");
+        DatabaseReference likesRef = dbRef.child("likes");
 
-        DatabaseReference bodyRef = FirebaseDatabase.getInstance().getReference("posts")
-                .child(postId).child("body");
+        DatabaseReference bodyRef = dbRef.child("body");
 
         bodyRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -61,7 +81,11 @@ public class PostsAdapter extends FirebaseRecyclerAdapter<PostsModel, PostsAdapt
 
                 if (body.isBlank()){
                     Log.d("onDataChange", "body is empty");
-                    testing.setVisibility(View.GONE);
+                    holder.ivImage.setVisibility(View.GONE);
+                } else {
+                    Log.d("onDataChange", "body is not empty");
+                    holder.ivImage.setVisibility(View.VISIBLE);
+                    Glide.with(holder.itemView.getContext()).load(body).into(holder.ivImage);
                 }
             }
 
@@ -122,14 +146,16 @@ public class PostsAdapter extends FirebaseRecyclerAdapter<PostsModel, PostsAdapt
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        TextView txtAuthor, txtTitle, txtBody;
+        TextView txtAuthor, txtTitle;
         MaterialButton btnLike;
+
+        ImageView ivImage;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             txtAuthor = itemView.findViewById(R.id.txtAuthor);
             txtTitle = itemView.findViewById(R.id.txtTitle);
-            txtBody = itemView.findViewById(R.id.txtBody);
+            ivImage = itemView.findViewById(R.id.ivImage);
             btnLike = itemView.findViewById(R.id.btnLike);
         }
     }
