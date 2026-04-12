@@ -136,6 +136,10 @@ public class PostsAdapter extends FirebaseRecyclerAdapter<PostsModel, PostsAdapt
                 public void onCancelled(@NonNull DatabaseError error) {}
             });
         });
+
+        holder.itemView.setOnClickListener(view -> {
+
+        });
     }
 
     @NonNull

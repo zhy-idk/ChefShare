@@ -1,116 +1,154 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginHorizontal="15dp"
     android:orientation="vertical"
     tools:context=".PostActivity">
 
-    <Button
-        android:id="@+id/btnBack"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:backgroundTint="?attr/colorSurface"
-        android:drawablePadding="0dp"
-        android:padding="0dp"
-        android:text="Go back"
-        android:textColor="?attr/colorOnSurface"
-        app:icon="@drawable/outline_arrow_left_alt_24"
-        app:iconTint="?attr/colorOnSurface" />
-
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
+        android:layout_height="match_parent"
+        android:layout_marginHorizontal="15dp"
         android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/textView5"
+        <Button
+            android:id="@+id/btnBack"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Make a new post"
+            android:backgroundTint="?attr/colorSurface"
+            android:drawablePadding="0dp"
+            android:padding="0dp"
+            android:text="Go back"
             android:textColor="?attr/colorOnSurface"
-            android:textSize="20sp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="0"
-            android:text="What do you have in mind?"
-            android:textColor="?attr/colorOnSurface" />
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/etPost"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Mom's spaghetti recipe"
-            android:inputType="textMultiLine"
-            android:maxLines="15"
-            android:textColor="?attr/colorOnSurface" />
-
+            app:icon="@drawable/outline_arrow_left_alt_24"
+            app:iconTint="?attr/colorOnSurface" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="0"
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
-            android:visibility="gone">
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:adjustViewBounds="false"
-                android:scaleType="fitCenter"
-                android:src="@drawable/image_arrow_up_24px" />
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
 
             <TextView
-                android:id="@+id/textView3"
+                android:id="@+id/textView5"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Select image(s)" />
+                android:text="Make a new post"
+                android:textColor="?attr/colorOnSurface"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="0"
+                android:text="What do you have in mind?"
+                android:textColor="?attr/colorOnSurface" />
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etPost"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Mom's spaghetti recipe"
+                android:inputType="textMultiLine"
+                android:maxLines="15"
+                android:textColor="?attr/colorOnSurface" />
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="0"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:visibility="gone">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:adjustViewBounds="false"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/image_arrow_up_24px" />
+
+                <TextView
+                    android:id="@+id/textView3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Select image(s)" />
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/btnImageSelect"
+                style="@style/Widget.Material3.Button.ElevatedButton.Icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp"
+                android:text="Select image(s)"
+                android:textColor="?attr/colorOnSurface"
+                app:cornerRadius="5dp"
+                app:icon="@drawable/image_arrow_up_24px"
+                app:iconPadding="0dp"
+                app:iconTint="?attr/colorOnSurface"
+                app:strokeColor="?attr/colorOnSurface"
+                app:strokeWidth="1dp" />
+
+            <ImageView
+                android:id="@+id/ivPreview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:adjustViewBounds="true"
+                android:visibility="visible"
+                tools:srcCompat="@tools:sample/avatars" />
+
+            <Button
+                android:id="@+id/btnPost"
+                style="@style/Widget.Material3.Button.TextButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:backgroundTint="?attr/colorOnSurface"
+                android:text="Post"
+                android:textAllCaps="false"
+                android:textColor="?attr/colorSurface"
+                app:cornerRadius="15dp" />
         </LinearLayout>
-
-        <Button
-            android:id="@+id/btnImageSelect"
-            style="@style/Widget.Material3.Button.ElevatedButton.Icon"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingLeft="5dp"
-            android:paddingRight="5dp"
-            android:text="Select image(s)"
-            android:textColor="?attr/colorOnSurface"
-            app:cornerRadius="5dp"
-            app:icon="@drawable/image_arrow_up_24px"
-            app:iconPadding="0dp"
-            app:iconTint="?attr/colorOnSurface"
-            app:strokeColor="?attr/colorOnSurface"
-            app:strokeWidth="1dp" />
-
-        <ImageView
-            android:id="@+id/ivPreview"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="0"
-            android:adjustViewBounds="true"
-            android:visibility="visible"
-            tools:srcCompat="@tools:sample/avatars" />
-
-        <Button
-            android:id="@+id/btnPost"
-            style="@style/Widget.Material3.Button.TextButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:backgroundTint="?attr/colorOnSurface"
-            android:text="Post"
-            android:textAllCaps="false"
-            android:textColor="?attr/colorSurface"
-            app:cornerRadius="15dp" />
     </LinearLayout>
 
-</LinearLayout>
+    <View
+        android:id="@+id/voverlay"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#80000000"
+        android:visibility="gone" />
+
+    <LinearLayout
+        android:id="@+id/progressLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            style="@android:style/Widget.Material.ProgressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:indeterminateBehavior="cycle"
+            android:indeterminateTint="?attr/colorSurface" />
+
+        <TextView
+            android:id="@+id/tvProgress"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="Progress"
+            android:textColor="#000000" />
+    </LinearLayout>
+
+</FrameLayout>

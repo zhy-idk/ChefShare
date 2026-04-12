@@ -65,11 +65,14 @@ public class ProfileFragment extends Fragment {
             }
         }).attach();
 
+
+
         Glide.with(requireContext())
                 .load("https://img.freepik.com/premium-vector/default-avatar-profile-icon-gray-placeholder-vector-illustration_514344-14757.jpg?semt=ais_hybrid&w=740&q=80")
                 .into(imgUser);
 
+        imgUser.setOnClickListener(click -> {
 
-
+        });
     }
 }
